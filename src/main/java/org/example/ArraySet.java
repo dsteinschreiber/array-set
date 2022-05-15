@@ -45,7 +45,15 @@ public class ArraySet extends MyAbstractSet<Integer> {
 
     @Override
     public int size() {
-        return 0;
+        int result = 0;
+
+        for (int i = 0; i < this.switches.length; i++){
+            if (this.switches[i]) {
+                result++;
+            }
+        }
+
+        return result;
     }
 
     @Override

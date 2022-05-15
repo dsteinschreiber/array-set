@@ -22,4 +22,10 @@ public class ArraySetTest {
         assertFalse(ArraySet.of(100).contains(1));
     }
 
+    @Test
+    public void sizeTest() {
+        assertEquals(3, ArraySet.of(100, 2,4,6).size());
+        assertEquals(0, ArraySet.of(100).size());
+    }
+
 }
