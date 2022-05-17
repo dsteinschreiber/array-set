@@ -20,4 +20,5 @@ public class IntegerHashSet extends GenericHashSet<Integer>{
     protected int hash(Integer value) {
         return value % this.buckets.length;
     }
+
 }

@@ -1,6 +1,5 @@
 package org.example;
 
-import java.lang.reflect.Array;
 
 
 public class ArraySet extends MyAbstractSet<Integer> {
@@ -47,13 +46,21 @@ public class ArraySet extends MyAbstractSet<Integer> {
     public int size() {
         int result = 0;
 
-        for (int i = 0; i < this.switches.length; i++){
-            if (this.switches[i]) {
+       // for (int i = 0; i < this.switches.length; i++){
+
+
+        for (boolean aSwitch : this.switches) {
+            if (aSwitch) {
                 result++;
             }
         }
 
         return result;
+    }
+
+    @Override
+    public MyList<Integer> toList() {
+        return null;
     }
 
     @Override
@@ -66,8 +73,4 @@ public class ArraySet extends MyAbstractSet<Integer> {
         return null;
     }
 
-    @Override
-    public boolean isSubsetOf(MyAbstractSet<Integer> myAbstractSet) {
-        return false;
-    }
 }

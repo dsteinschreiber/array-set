@@ -6,6 +6,8 @@ public abstract class GenericHashSet<T> extends MyAbstractSet<T> {
 
     MyList<T>[] buckets;
 
+
+    @SuppressWarnings("unchecked")
     public GenericHashSet(int numberOfBuckets) {
         this.buckets = new MyList[numberOfBuckets];
     }
@@ -20,7 +22,9 @@ public abstract class GenericHashSet<T> extends MyAbstractSet<T> {
             this.buckets[hashedValue] = new MyList<>();
         }
 
-        this.buckets[hashedValue].append(value);
+        if (!this.buckets[hashedValue].contains(value)) {
+            this.buckets[hashedValue].append(value);
+        }
 
         return this;
     }
@@ -68,18 +72,19 @@ public abstract class GenericHashSet<T> extends MyAbstractSet<T> {
         return result;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return false;
-    }
 
     @Override
-    public String toString() {
-        return null;
-    }
+    public MyList<T> toList() {
+        MyList<T> result = new MyList<>();
 
-    @Override
-    public boolean isSubsetOf(MyAbstractSet<T> myAbstractSet) {
-        return false;
+        for (MyList<T> bucket : this.buckets) {
+            if (bucket != null) {
+                for (T value : bucket) {
+                    result.append(value);
+                }
+            }
+        }
+
+        return result;
     }
 }

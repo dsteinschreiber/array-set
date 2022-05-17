@@ -28,8 +28,25 @@ public class IntegerHashSetTest {
 
     @Test
     public void sizeTest() {
-        GenericHashSet<Integer> test = IntegerHashSet.of(1000, 10,20,30,40,50);
+        GenericHashSet<Integer> test = IntegerHashSet.of(1000, 10, 20, 30, 40, 50);
 
         assertEquals(5, test.size());
+    }
+
+    @Test
+    public void toListTest() {
+        GenericHashSet<Integer> test = IntegerHashSet.of(1000,
+                10, 20, 30, 40);
+
+        System.out.println(test.toList());
+    }
+
+    @Test
+    public void equalsTest() {
+        GenericHashSet<Integer> test1 = IntegerHashSet.of(1000, 10, 20, 30, 40);
+        GenericHashSet<Integer> test2 = IntegerHashSet.of(1000, 40, 20, 10, 30);
+
+        assertEquals(test1, test2);
+
     }
 }
