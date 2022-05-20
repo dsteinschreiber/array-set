@@ -9,7 +9,7 @@ public class StringHashSetTest {
 
     @Test
     public void containsTest() {
-        GenericHashSet<String> test = StringHashSet.of(1000, "hello", "world");
+        MySet<String> test = StringHashSet.of(1000, "hello", "world");
 
         assertTrue(test.contains("hello"));
         assertTrue(test.contains("world"));
@@ -19,7 +19,7 @@ public class StringHashSetTest {
 
     @Test
     public void isEmptyTest() {
-        GenericHashSet<String> test = StringHashSet.of(1000);
+        MySet<String> test = StringHashSet.of(1000);
 
         assertTrue(test.isEmpty());
 
@@ -30,14 +30,14 @@ public class StringHashSetTest {
 
     @Test
     public void sizeTest() {
-        GenericHashSet<String> test = StringHashSet.of(1000, "hello", "world", "goodnight", "moon");
+        MySet<String> test = StringHashSet.of(1000, "hello", "world", "goodnight", "moon");
 
         assertEquals(4, test.size());
     }
 
     @Test
     public void toListTest() {
-        GenericHashSet<String> test = StringHashSet.of(1000,
+        MySet<String> test = StringHashSet.of(1000,
                 "hello", "world", "goodnight", "moon");
 
         System.out.println(test.toList());
@@ -60,9 +60,17 @@ public class StringHashSetTest {
 
     @Test
     public void someTest() {
-        GenericHashSet<String> test = StringHashSet.of(1000, "hello", "hello");
+        MySet<String> test = StringHashSet.of(1000, "hello", "hello");
 
         System.out.println(test);
+    }
+
+    @Test
+    public void removeTest() {
+        MySet<String> test1= StringHashSet.of(1000, "hello");
+        MySet<String> test2= StringHashSet.of(1000, "hello", "world");
+
+        assertEquals(test1, test2.remove("world"));
     }
 
 

@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,7 @@ public class IntegerHashSetTest {
 
     @Test
     public void isEmptyTest() {
-        GenericHashSet<Integer> test = IntegerHashSet.of(1000);
+        MySet<Integer> test = IntegerHashSet.of(1000);
 
         assertTrue(test.isEmpty());
 
@@ -28,14 +29,14 @@ public class IntegerHashSetTest {
 
     @Test
     public void sizeTest() {
-        GenericHashSet<Integer> test = IntegerHashSet.of(1000, 10, 20, 30, 40, 50);
+        MySet<Integer> test = IntegerHashSet.of(1000, 10, 20, 30, 40, 50);
 
         assertEquals(5, test.size());
     }
 
     @Test
     public void toListTest() {
-        GenericHashSet<Integer> test = IntegerHashSet.of(1000,
+        MySet<Integer> test = IntegerHashSet.of(1000,
                 10, 20, 30, 40);
 
         System.out.println(test.toList());
@@ -43,10 +44,19 @@ public class IntegerHashSetTest {
 
     @Test
     public void equalsTest() {
-        GenericHashSet<Integer> test1 = IntegerHashSet.of(1000, 10, 20, 30, 40);
-        GenericHashSet<Integer> test2 = IntegerHashSet.of(1000, 40, 20, 10, 30);
+        MySet<Integer> test1 = IntegerHashSet.of(1000, 10, 20, 30, 40);
+        MySet<Integer> test2 = IntegerHashSet.of(1000, 40, 20, 10, 30);
 
         assertEquals(test1, test2);
 
+    }
+
+    @Disabled
+    @Test
+    public void removeTest() {
+        MySet<Integer> test1 = IntegerHashSet.of(1000,1,2);
+        MySet<Integer> test2 = IntegerHashSet.of(1000,1,2,3);
+
+        assertEquals(test1, test2.remove(3));
     }
 }

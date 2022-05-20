@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public abstract class GenericHashSet<T> extends MyAbstractSet<T> {
 
@@ -16,7 +17,7 @@ public abstract class GenericHashSet<T> extends MyAbstractSet<T> {
     abstract protected int hash(T value);
 
     @Override
-    public MyAbstractSet<T> add(T value) {
+    public MySet<T> add(T value) {
         int hashedValue = hash(value);
         if (this.buckets[hashedValue] == null) {
             this.buckets[hashedValue] = new MyList<>();
@@ -30,8 +31,21 @@ public abstract class GenericHashSet<T> extends MyAbstractSet<T> {
     }
 
     @Override
-    public MyAbstractSet<T> remove(T t) {
-        return null;
+    public MySet<T> remove(T value) {
+        for (MyList<T> bucket : this.buckets) {
+            if (bucket != null) {
+                Iterator<T> it = bucket.iterator();
+
+                while (it.hasNext()) {
+                    T v = it.next();
+
+                    if (v.equals(value)) {
+                        it.remove();
+                    }
+                }
+            }
+        }
+        return this;
     }
 
     @Override
