@@ -3,22 +3,41 @@ package org.example;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public abstract class GenericHashSet<T> extends MyAbstractSet<T> {
+public class GenericHashSet<T> extends MyAbstractSet<T> {
 
     MyList<T>[] buckets;
-
 
     @SuppressWarnings("unchecked")
     public GenericHashSet(int numberOfBuckets) {
         this.buckets = new MyList[numberOfBuckets];
     }
 
-    /// HASH
-    abstract protected int hash(T value);
+    @SafeVarargs
+    public static <T> GenericHashSet<T> asOfSize(int buckets, T... values){
+        GenericHashSet<T> result = new GenericHashSet<>(buckets);
+
+        for (T value : values){
+            result.add(value);
+        }
+
+        return result;
+    }
+
+    @SafeVarargs
+    // method "of" has default bucket size of 1000
+    public static <T> GenericHashSet<T> of(T... values) {
+        return asOfSize(1000, values);
+    }
+
+
+    protected int hash(T value) {
+        return value.hashCode() % this.buckets.length;
+    }
+
 
     @Override
     public MySet<T> add(T value) {
-        int hashedValue = hash(value);
+        int hashedValue = this.hash(value);
         if (this.buckets[hashedValue] == null) {
             this.buckets[hashedValue] = new MyList<>();
         }
@@ -50,7 +69,7 @@ public abstract class GenericHashSet<T> extends MyAbstractSet<T> {
 
     @Override
     public boolean contains(T value) {
-        int hashedValue = hash(value);
+        int hashedValue = this.hash(value);
 
         if (this.buckets[hashedValue] == null) {
             return false;
@@ -100,5 +119,11 @@ public abstract class GenericHashSet<T> extends MyAbstractSet<T> {
         }
 
         return result;
+    }
+
+    // Not most performant way, but functional
+    @Override
+    public Iterator<T> iterator() {
+        return this.toList().iterator();
     }
 }

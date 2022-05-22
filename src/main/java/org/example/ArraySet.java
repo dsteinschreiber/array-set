@@ -1,6 +1,7 @@
 package org.example;
 
 
+import java.util.Iterator;
 
 public class ArraySet extends MyAbstractSet<Integer> {
 
@@ -73,4 +74,8 @@ public class ArraySet extends MyAbstractSet<Integer> {
         return null;
     }
 
+    @Override
+    public Iterator<Integer> iterator() {
+        return null;
+    }
 }
